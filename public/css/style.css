@@ -3,9 +3,10 @@ h1, h2, h3, h4, h5, h6, .brand {
 	text-align:center;
 	font-size:7em;
 }
-p, div {
+td, th {
 	font-family: 'Cabin', Helvetica, Arial, sans-serif;
 	text-align:center;
+	padding: 10 20px;
 }
 a {
 	color: black;
@@ -15,4 +16,9 @@ a {
 }
 .icon-ok {
 	color: green;
+}
+
+#results {
+	width: 90%;
+	margin: 0 auto;
 }
