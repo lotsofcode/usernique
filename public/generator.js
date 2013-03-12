@@ -5,6 +5,11 @@ Favs so far:
 
  */
 
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
 function scrollTo(elem, callback) {
     $('html,body').animate({
       scrollTop: $(elem).offset().top
@@ -252,17 +257,15 @@ var words = [
 var stack = [];
 for (var i = 0; i < 10; i++) {
 
-  var first, second;
+  var current = [];
 
-  first = words[Math.floor(Math.random() * words.length)].toLowerCase();
-  second = words[Math.floor(Math.random() * words.length)].toLowerCase();
+  // first = words[Math.floor(Math.random() * words.length)].toLowerCase();
+  // second = words[Math.floor(Math.random() * words.length)].toLowerCase();
 
-  // current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
-  // current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
-  // console.log(current)
+  current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
+  current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
 
-  check(first + second, 'row_' + i)
-  
+  check(current.join(''), 'row_' + i)  
 }
 
 function randomName() {
