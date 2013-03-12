@@ -151,7 +151,7 @@ function processItem(name) {
 
     function deferNext() {
       current += 1;
-      if (current == config.length) {
+      if (current == (config.length / 2)) { // half way there? kick off the next one
         if (parseInt($('.success', id).text(), 10) == config.length) {
           $('.success', id).parents('tr').addClass('maximum');
         }
