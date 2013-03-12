@@ -66,7 +66,7 @@ function processItem(name) {
 
   rows += 1;
 
-  var html = '<tr id="row-' + rows + '">' +
+  var html = '<tr id="row-' + rows + '" class="row">' +
     '<td>' +
       '<a class="username"></a> ' +
     '</td>' +
@@ -152,9 +152,13 @@ function processItem(name) {
     function deferNext() {
       current += 1;
       if (current == (config.length / 2)) { // half way there? kick off the next one
-        if (parseInt($('.success', id).text(), 10) == config.length) {
-          $('.success', id).parents('tr').addClass('maximum');
-        }
+
+        $('.row').each(function() {
+          if($('.icon-ok', this).length == config.length) {
+            $(this).addClass('maximum');
+          }
+        });
+
         next();
       }
     }
