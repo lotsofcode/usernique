@@ -23,10 +23,19 @@ a {
 	margin: 0 auto;
 }
 
+td {
+	opacity: 0.4;
+}
+
 .processing td {
 	background: magenta;
+   -webkit-transition: opacity .50s ease-in-out;
+   opacity: .8;
 }
 
 .maximum td {
 	background: lightgreen;	
+   -webkit-transition: opacity .50s ease-in-out;
+   opacity: 1;
 }
+
