@@ -356,9 +356,9 @@ for (var i = 0; i < 20; i++) {
   // second = words[Math.floor(Math.random() * words.length)].toLowerCase();
 
   // for (var j = 0; j < 3; j++) {
+    current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
     current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
-    current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
-    current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
+    // current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
   // }
 
   check(current.join(''), 'row_' + i)  
