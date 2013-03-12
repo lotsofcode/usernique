@@ -49,4 +49,14 @@ app.get('/com/:username', function(req, res) {
 	});
 });
 
+app.get('/couk/:username', function(req, res) {
+	request('http://www.'+req.params.username+'.co.uk/', function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			res.send('taken');
+		} else {
+			res.send('free');
+		}
+	});
+});
+
 app.listen(process.env.PORT || 8080);

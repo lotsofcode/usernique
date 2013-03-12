@@ -1,3 +1,20 @@
+/*
+Favs so far:
+
+  - barbecuebrain
+
+ */
+
+function scrollTo(elem, callback) {
+    $('html,body').animate({
+      scrollTop: $(elem).offset().top
+    }, {
+      duration: 400,
+      complete: callback
+    });
+}
+
+
 var words = [
   'Adult',
   'Aeroplane',
@@ -42,7 +59,7 @@ var words = [
   'Carrot',
   'Cave',
   'Chair',
-  'Chess Board',
+  'Chess',
   'Chief',
   'Child',
   'Chisel',
@@ -111,12 +128,12 @@ var words = [
   'Ice',
   'Ice-c',
   'Insect',
-  'Jet fighter',
+  'Jet',
   'Junk',
   'Kaleidoscope',
   'Kitchen',
   'Knife',
-  'Leather jacket',
+  'Leather',
   'Leg',
   'Library',
   'Liquid',
@@ -124,7 +141,6 @@ var words = [
   'Man',
   'Map',
   'Maze',
-  'M',
   'Meteor',
   'Microscope',
   'Milk',
@@ -232,14 +248,21 @@ var words = [
   'Xray',
 ];
 
-for (var i = 0; i < 100; i++) {
+
+var stack = [];
+for (var i = 0; i < 10; i++) {
 
   var first, second;
 
   first = words[Math.floor(Math.random() * words.length)].toLowerCase();
   second = words[Math.floor(Math.random() * words.length)].toLowerCase();
 
-  check(first + '' + second, 'row_' + i);
+  // current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
+  // current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
+  // console.log(current)
+
+  check(first + second, 'row_' + i)
+  
 }
 
 function randomName() {
@@ -289,27 +312,42 @@ function randomName() {
 function check(name, id) {
   var html = '<tr id="' + id + '">' +
     '<td>' +
-      '<a class="twitter-url"></a> ' +
+      '<a class="username"></a> ' +
     '</td>' +
+    // '<td>' +
+    //   '<a class="twitter-url"></a> ' +
+    // '</td>' +
     '<td>' +
-      '<i class="twitter icon-spinner icon-spin"></i>' +
+      '<a class="twitter icon-spinner icon-spin" target="_blank"></a>' +
     '</td>' +
+    // '<td>' +
+    //   '<a class="github-url"></a> ' +
+    // '</td>' +
     '<td>' +
-      '<a class="github-url"></a> ' +
-    '</td>' +
-    '<td>' +
-      '<i class="github icon-spinner icon-spin"></i>' +
+      '<a class="github icon-spinner icon-spin" target="_blank"></a>' +
     '</td>' +
     // '<td><a class="io-url"></a></td>' +
     // '<td>' +
     //   '<i class="io icon-spinner icon-spin"></i>' +
     // '</td>' +
+    // '<td>' +
+    //   '<a class="couk-url"></a> ' +
+    // '</td>' +
     '<td>' +
-      '<a class="com-url"></a> ' +
+      '<a class="io icon-spinner icon-spin" target="_blank"></a>' +
     '</td>' +
     '<td>' +
-      '<i class="com icon-spinner icon-spin"></i>' +
+      '<a class="com icon-spinner icon-spin" target="_blank"></a>' +
     '</td>' +
+    '<td>' +
+      '<a class="couk icon-spinner icon-spin" target="_blank"></a>' +
+    '</td>' +
+    // '<td>' +
+    //   '<a class="com-url"></a> ' +
+    // '</td>' +
+    // '<td>' +
+    //   '<i class="com icon-spinner icon-spin"></i>' +
+    // '</td>' +
     '<td>' +
       '<i class="success">0</i> / ' +
       '<i class="progress">0</i>' +
@@ -318,59 +356,148 @@ function check(name, id) {
 
   id = '#' + id;
 
-  $('#results').append(html);
+  // stack.push(function(next) {
+    $('#results').append(html);  
+    $(".username", id).text(name);
+    $(".twitter", id).attr("href", "http://www.twitter.com/" + name);
+    $(".github", id).attr("href", "http://www.github.com/" + name);
+    $(".io", id).attr("href", "http://www." + name + ".io");
+    $(".com", id).attr("href", "http://www." + name + ".com");
+    $(".couk", id).attr("href", "http://www." + name + ".co.uk");
 
-  $(".username", id).text(name);
-  $(".twitter-url", id).text("twitter.com/" + name).attr("href", "http://www.twitter.com/" + name);
-  $(".github-url", id).text("github.com/" + name).attr("href", "http://www.github.com/" + name);
-  $(".io-url", id).text(name + ".io").attr("href", "http://www." + name + ".io");
-  $(".com-url", id).text(name + ".com").attr("href", "http://www." + name + ".com");
-
-  $.get("github/" + name, function(data) {
-    if (data == "free") {
-      $(".github", id).attr("class", "icon-ok");
-      $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
-    } else if (data == "taken") {
-      $(".github", id).attr("class", "icon-remove");
-    } else {
-      $(".github", id).attr("class", "icon-question-sign");
-    }
-    $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
-  });
-
-  $.get("twitter/" + name, function(data) {
-    if (data == "free") {
-      $(".twitter", id).attr("class", "icon-ok");
-      $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
-    } else if (data == "taken") {
-      $(".twitter", id).attr("class", "icon-remove");
-    } else {
-      $(".twitter", id).attr("class", "icon-question-sign");
-    }
-    $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
-  });
-
-  // $.get("io/" + name, function(data) {
-  //   if (data == "free") {
-  //     $(".io", id).attr("class", "icon-ok");
-  //     $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
-  //   } else if (data == "taken") {
-  //     $(".io", id).attr("class", "icon-remove");
-  //   } else {
-  //     $(".io", id).attr("class", "icon-question-sign");
-  //   }
-  //   $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+    // $(".twitter-url", id).text("twitter.com/" + name).attr("href", "http://www.twitter.com/" + name);
+    // $(".github-url", id).text("github.com/" + name).attr("href", "http://www.github.com/" + name);
+    // $(".io-url", id).text(name + ".io").attr("href", "http://www." + name + ".io");
+    // $(".couk-url", id).text(name + ".co.uk").attr("href", "http://www." + name + ".co.uk");
+    // $(".com-url", id).text(name + ".com").attr("href", "http://www." + name + ".com");
+  //   next();
   // });
 
-  $.get("com/" + name, function(data) {
-    if (data == "free") {
-      $(".com", id).attr("class", "icon-ok");
-      $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
-    } else if (data == "taken") {
-      $(".com", id).attr("class", "icon-remove");
-    } else {
-      $(".com", id).attr("class", "icon-question-sign");
+  stack.push(function(next) {
+
+    $('.processing').removeClass('processing');
+    $(id).addClass('processing');
+
+    // scrollTo('.processing', function() {
+    //   console.log($(this).siblings())
+    // })
+
+    next();
+  });
+
+  stack.push(function(next) {
+
+    var current = 0;
+
+    $.get("twitter/" + name, function(data) {
+      if (data == "free") {
+        $(".twitter", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".twitter", id).attr("class", "icon-remove");
+      } else {
+        $(".twitter", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+      deferNext();
+    });
+
+    $.get("github/" + name, function(data) {
+      if (data == "free") {
+        $(".github", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".github", id).attr("class", "icon-remove");
+      } else {
+        $(".github", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+      deferNext();
+    });
+
+    $.get("couk/" + name, function(data) {
+      if (data == "free") {
+        $(".couk", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".couk", id).attr("class", "icon-remove");
+      } else {
+        $(".couk", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+
+      deferNext();
+    });
+
+    $.get("io/" + name, function(data) {
+      if (data == "free") {
+        $(".io", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".io", id).attr("class", "icon-remove");
+      } else {
+        $(".io", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+
+      deferNext();
+    });
+
+    $.get("com/" + name, function(data) {
+      if (data == "free") {
+        $(".com", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".com", id).attr("class", "icon-remove");
+      } else {
+        $(".com", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+
+      deferNext();
+    });
+
+    function deferNext() {
+      current += 1;
+      if (current == 5) {
+
+        if ($('.success', id).text() == 5) {
+          $('.success', id).parents('tr').addClass('maximum');
+        }
+
+        next();
+      }
     }
-    $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
   });
 }
+
+// current = stack.pop();
+
+
+var MyStack = function(current) {
+  this.current = current;
+  this.next = null;
+}
+
+MyStack.prototype = {
+  process: function() {
+    current = this;
+    this.current(function() {
+      current.next && current.next.process();
+    })
+  },
+  setNextStack: function(next) {
+    this.next = next;
+  }
+}
+
+var stacks = [];
+for (var i = 0; i < stack.length; i++) {
+  stacks.push(new MyStack(stack[i]));
+}
+
+for (var i = 0; i < stacks.length; i++) {
+  stacks[i].setNextStack(stacks[i + 1]);
+}
+
+stacks[0].process();
