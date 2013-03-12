@@ -17,6 +17,18 @@ app.get('/github/:username', function(req, res) {
 	});
 });
 
+app.get('/youtube/:username', function(req, res) {
+	request('http://www.youtube.com/user/' + req.params.username, function (error, response, body) {
+		if(!error && response.statusCode == 200) {
+			res.send('taken');
+		} else if(response.statusCode == 404) {
+			res.send('free');
+		} else {
+			res.send('unknown');
+		}
+	});
+});
+
 app.get('/twitter/:username', function(req, res) {
 	request('http://www.twitter.com/' + req.params.username, function (error, response, body) {
 		if(!error && response.statusCode == 200) {

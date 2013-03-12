@@ -2,6 +2,7 @@
 Favs so far:
 
   - barbecuebrain
+  - circusteeth
 
  */
 
@@ -329,6 +330,9 @@ function check(name, id) {
     '<td>' +
       '<a class="github icon-spinner icon-spin" target="_blank"></a>' +
     '</td>' +
+    '<td>' +
+      '<a class="youtube icon-spinner icon-spin" target="_blank"></a>' +
+    '</td>' +
     // '<td><a class="io-url"></a></td>' +
     // '<td>' +
     //   '<i class="io icon-spinner icon-spin"></i>' +
@@ -364,6 +368,7 @@ function check(name, id) {
     $(".username", id).text(name);
     $(".twitter", id).attr("href", "http://www.twitter.com/" + name);
     $(".github", id).attr("href", "http://www.github.com/" + name);
+    $(".youtube", id).attr("href", "http://www.youtube.com/user/" + name);
     $(".io", id).attr("href", "http://www." + name + ".io");
     $(".com", id).attr("href", "http://www." + name + ".com");
     $(".couk", id).attr("href", "http://www." + name + ".co.uk");
@@ -418,6 +423,21 @@ function check(name, id) {
       deferNext();
     });
 
+    $.get("youtube/" + name, function(data) {
+      if (data == "free") {
+        $(".youtube", id).attr("class", "icon-ok");
+        $('.success', id).html(parseInt($('.success', id).html(), 10) + 1);
+      } else if (data == "taken") {
+        $(".youtube", id).attr("class", "icon-remove");
+      } else {
+        $(".youtube", id).attr("class", "icon-question-sign");
+      }
+      $('.progress', id).html(parseInt($('.progress', id).html(), 10) + 1);
+      deferNext();
+    });
+
+https://www.youtube.com/user/circusteeth
+
     $.get("couk/" + name, function(data) {
       if (data == "free") {
         $(".couk", id).attr("class", "icon-ok");
@@ -461,10 +481,11 @@ function check(name, id) {
     });
 
     function deferNext() {
+      var services = 6;
       current += 1;
-      if (current == 5) {
+      if (current == services) {
 
-        if ($('.success', id).text() == 5) {
+        if (parseInt($('.success', id).text(), 10) == services) {
           $('.success', id).parents('tr').addClass('maximum');
         }
 
