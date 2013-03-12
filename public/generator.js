@@ -20,6 +20,98 @@ function scrollTo(elem, callback) {
     });
 }
 
+var words_three = [
+'aba',
+'abb',
+'ait',
+'ala',
+'alb',
+'alk',
+'alt',
+'awn',
+'bar',
+'bee',
+'bel',
+'bis',
+'cep',
+'col',
+'cwm',
+'dah',
+'dap',
+'daw',
+'dit',
+'dol',
+'dop',
+'eft',
+'ell',
+'ere',
+'eth',
+'fid',
+'fie',
+'fug',
+'gad',
+'gal',
+'gar',
+'gib',
+'gid',
+'hoc',
+'hoy',
+'ivi',
+'jow',
+'jud',
+'jug',
+'ked',
+'kef',
+'kep',
+'ket',
+'kip',
+'kir',
+'kit',
+'lac',
+'lar',
+'lev',
+'lux',
+'mel',
+'mho',
+'mim',
+'mow',
+'nim',
+'ord',
+'orf',
+'pax',
+'ped',
+'per',
+'pro',
+'qat',
+'qua',
+'ret',
+'rev',
+'ria',
+'roc',
+'sal',
+'sic',
+'ted',
+'tej',
+'tod',
+'tog',
+'ton',
+'tot',
+'tow',
+'tye',
+'wis',
+'wyn',
+'yad',
+'yag',
+'yam',
+'yaw',
+'yen',
+'yew',
+'yex',
+'yok',
+'yon',
+'zek',
+'zugs'
+];
 
 var words = [
   'Adult',
@@ -263,8 +355,11 @@ for (var i = 0; i < 20; i++) {
   // first = words[Math.floor(Math.random() * words.length)].toLowerCase();
   // second = words[Math.floor(Math.random() * words.length)].toLowerCase();
 
-  current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
-  current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
+  // for (var j = 0; j < 3; j++) {
+    current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
+    current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
+    current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
+  // }
 
   check(current.join(''), 'row_' + i)  
 }
