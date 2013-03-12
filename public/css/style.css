@@ -1,12 +1,24 @@
+body {
+}
 h1, h2, h3, h4, h5, h6, .brand {
 	font-family: 'Lobster', Georgia, Times, serif;
 	text-align:center;
-	font-size:7em;
+	font-size:5em;
+	margin: .2em;
+	color: #333;
 }
 td, th {
 	font-family: 'Cabin', Helvetica, Arial, sans-serif;
 	text-align:center;
 	padding: 10 20px;
+}
+tr.heading th {
+	color: #b4d455;
+	background: #000;
+}
+tr.subheading th {
+	color: #b4d455;
+	background: #333;
 }
 a {
 	color: black;
@@ -25,10 +37,11 @@ a {
 
 td {
 	opacity: 0.4;
+	background: #eee;
 }
 
 .processing td {
-	background: magenta;
+	background: #ccc;
    -webkit-transition: opacity .50s ease-in-out;
    opacity: .8;
 }

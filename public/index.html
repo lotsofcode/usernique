@@ -10,16 +10,19 @@
 	</head>
 	<body>
 
+		<h1>Random username check</h1>
+
 		<table id="results">
 
-			<tr>
-				<th></th>
+			<tr class="heading">
+				<td></td>
 				<th>twitter</th>
 				<th>github</th>
 				<th>youtube</th>
 				<th>io</th>
 				<th>com</th>
 				<th>co.uk</th>
+				<td></td>
 			</tr>
 
 		</table>
@@ -353,41 +356,52 @@
 		    'Xray',
 		  ];
 
+		  var amount = 10,
+		  	  i = 0;
+
 		  $(document).ready(function() {
+
+		  	i = 0;
 		  	stack = [];
 
+		  	processHeading("Random word");
+
 			// random word
-			for (; i < 20; i++) {
+			for (; i < (amount * 1); i++) {
 				var current = [];
 				current.push(randomName().toLowerCase());
-				processItem(current.join(''), 'row_' + i);
+				processItem(current.join(''));
 			}
+
+			processHeading("Combined Larger word & smaller word");
 
 		  	// larger word / smaller word
-			for (var i = 0; i < 5; i++) {
+			for (; i < (amount * 2); i++) {
 				var current = [];
 				current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
 				current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
-				processItem(current.join(''), 'row_' + i);
+				processItem(current.join(''));
 			}
+
+			processHeading("x2 combined smaller words");
 
 			// small word  / smaller word
-			for (; i < 10; i++) {
+			for (; i < (amount * 3); i++) {
 				var current = [];
 				current.push(words[Math.floor(Math.random() * words.length)].toLowerCase());
 				current.push(words_three[Math.floor(Math.random() * words_three.length)].toLowerCase());
-				processItem(current.join(''), 'row_' + i);
+				processItem(current.join(''));
 			}
 
+			processHeading("x2 combined random words");
+
 			// x2 random words
-			for (; i < 15; i++) {
+			for (; i < (amount * 4); i++) {
 				var current = [];
 				current.push(randomName().toLowerCase());
 				current.push(randomName().toLowerCase());
-				processItem(current.join(''), 'row_' + i);
+				processItem(current.join(''));
 			}
-
-			console.log(stack);
 
 			processStack(stack)
 		  });
